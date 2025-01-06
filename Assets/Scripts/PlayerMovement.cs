@@ -12,11 +12,14 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     CapsuleCollider2D bodyCollider;
     BoxCollider2D feetCollider;
+    SpriteRenderer spriteRenderer;
     float gravityScaleAtStart;
+    bool isAlive = true;
 
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 10f;
     [SerializeField] float climbSpeed = 5f;
+    [SerializeField] Vector2 deathKick = new Vector2(1f, 1f);
 
     void Start()
     {
@@ -24,23 +27,28 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         gravityScaleAtStart = rb2d.gravityScale;
     }
 
     void Update()
     {
+        if (!isAlive) { return; }
         Run();
         FlipSprite();
         ClimbLadder();
+        Die();
     }
 
     void OnMove(InputValue value)
     {
+        if (!isAlive) { return; }
         moveInput = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value)
     {
+        if (!isAlive) { return; }
         if (!feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;
@@ -86,5 +94,16 @@ public class PlayerMovement : MonoBehaviour
 
         bool playerHasVerticalSpeed = Mathf.Abs(rb2d.velocity.y) > Mathf.Epsilon;
         animator.SetBool("isClimbing", playerHasVerticalSpeed);
+    }
+
+    void Die()
+    {
+        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+            isAlive = false;
+            animator.SetTrigger("Dying");
+            spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+            rb2d.velocity = deathKick;
+        }
     }
 }
