@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] float groundJumpSpeed = 10f;
+    [SerializeField] float waterJumpSpeed = 13f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(1f, 1f);
 
@@ -52,6 +54,13 @@ public class PlayerMovement : MonoBehaviour
         if (!feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;
+        }
+        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+        {
+            jumpSpeed = waterJumpSpeed;
+        }
+        else {
+            jumpSpeed = groundJumpSpeed;
         }
 
         if (value.isPressed)
@@ -98,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
-        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
         {
             isAlive = false;
             animator.SetTrigger("Dying");
