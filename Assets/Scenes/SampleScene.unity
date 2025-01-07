@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 597019287}
   m_Layer: 11
   m_Name: Blob (Enemy)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21430,33 +21430,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1861383209504022344, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: deathKick.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861383209504022344, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: deathKick.y
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2580216537806733316, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789219970898832318, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789219970898832318, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789219970898832318, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789219970898832318, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6396912252468006021, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21498,10 +21474,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9168729325864739244, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 54901cedc8ea3f547a6c95ba35eccc1c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
