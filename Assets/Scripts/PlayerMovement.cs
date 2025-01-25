@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Dying");
             spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
             rb2d.velocity = deathKick;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }

@@ -16,7 +16,6 @@ public class LevelExit : MonoBehaviour
 
     IEnumerator LoadNextLevel()
     {
-        Debug.Log("Load Next");
         yield return new WaitForSecondsRealtime(levelLoadDelay);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
