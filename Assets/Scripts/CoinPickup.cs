@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class CoinPickup : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other) {
+    [SerializeField] AudioClip coinPickupSFX;
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.tag == "Player")
         {
+            Debug.Log("camera position: " + Camera.main.transform.position);
+            FindObjectOfType<AudioSource>().PlayOneShot(coinPickupSFX);
+            //AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
             Destroy(gameObject);
         }
     }
