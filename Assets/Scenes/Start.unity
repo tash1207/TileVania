@@ -2699,7 +2699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531321590138178302, guid: edf73542d1df5f546824442f35558bb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.95
+      value: 2.55
       objectReference: {fileID: 0}
     - target: {fileID: 2531321590138178302, guid: edf73542d1df5f546824442f35558bb5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8018,6 +8018,10 @@ PrefabInstance:
     - target: {fileID: 6568827025838122909, guid: acef17a820f0eb541894cd0816abe643, type: 3}
       propertyPath: m_Name
       value: Scene Persist
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568827025838122909, guid: acef17a820f0eb541894cd0816abe643, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7640602938919410955, guid: acef17a820f0eb541894cd0816abe643, type: 3}
       propertyPath: m_LocalPosition.x
