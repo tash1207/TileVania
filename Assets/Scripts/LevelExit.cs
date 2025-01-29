@@ -25,6 +25,12 @@ public class LevelExit : MonoBehaviour
             nextSceneIndex = 0;
         }
 
+        // Reset score and lives if leaving start menu scene.
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            FindObjectOfType<GameSession>().ResetLivesAndScore();
+        }
+
         FindObjectOfType<ScenePersist>().ResetScenePersist();
         SceneManager.LoadScene(nextSceneIndex);
     }

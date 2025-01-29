@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
-    [SerializeField] int totalScore = 0;
+    [SerializeField] int startingPlayerLives = 3;
+    [SerializeField] int startingTotalScore = 0;
+
+    int playerLives;
+    int totalScore;
 
     [SerializeField] TextMeshProUGUI numLivesText;
     [SerializeField] TextMeshProUGUI numScoreText;
@@ -28,6 +31,14 @@ public class GameSession : MonoBehaviour
 
     void Start()
     {
+        ResetLivesAndScore();
+    }
+
+    public void ResetLivesAndScore()
+    {
+        playerLives = startingPlayerLives;
+        totalScore = startingTotalScore;
+
         numLivesText.text = playerLives.ToString();
         numScoreText.text = totalScore.ToString();
     }

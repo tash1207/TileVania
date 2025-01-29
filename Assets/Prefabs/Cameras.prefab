@@ -462,7 +462,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -876,6 +876,8 @@ MonoBehaviour:
   - m_Hash: 256545655
     m_ParentHash: 756556552
   - m_Hash: -725336713
+    m_ParentHash: 756556552
+  - m_Hash: -1546996312
     m_ParentHash: 756556552
 --- !u!1 &7974122983783003999
 GameObject:
