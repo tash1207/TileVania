@@ -155,4 +155,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b11dbf982ad5f4689a85e4769101e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPickupSFX: {fileID: 8300000, guid: 9cb48aff319edcb4fa4674a39e63a074, type: 3}
+  coinPickupSFX: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  pointsPerGoldCoin: 100
