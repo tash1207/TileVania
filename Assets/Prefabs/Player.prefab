@@ -222,6 +222,9 @@ MonoBehaviour:
   waterJumpSpeed: 13
   climbSpeed: 5
   deathKick: {x: 5, y: 10}
+  bounceSFX: {fileID: 8300000, guid: 4b4dd7245f6104c8c8eb07ccf6b386ed, type: 3}
+  bulletSFX: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
+  deathSFX: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
   bullet: {fileID: 1757445997432493604, guid: ac0ddd66126ffe04d92948da127efa50, type: 3}
   gun: {fileID: 1706491636157645942}
 --- !u!61 &9168729325864739244

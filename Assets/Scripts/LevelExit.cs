@@ -5,18 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
-    [SerializeField] float levelLoadDelay = 0.5f;
+    [SerializeField] AudioClip levelExitSFX;
+    //[SerializeField] float levelLoadDelay = 0.5f;
+
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player")
         {
+            SoundFXManager.instance.PlaySoundFXClip(levelExitSFX, Camera.main.transform, 0.6f);
             StartCoroutine(LoadNextLevel());
-            
         }
     }
 
     IEnumerator LoadNextLevel()
     {
-        yield return new WaitForSecondsRealtime(levelLoadDelay);
+        yield return new WaitForSecondsRealtime(levelExitSFX.length);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

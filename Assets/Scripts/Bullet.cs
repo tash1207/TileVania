@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 10f;
+    [SerializeField] AudioClip deathSFX;
 
     Rigidbody2D rb2d;
     PlayerMovement player;
@@ -30,6 +31,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
             Destroy(other.gameObject);
         }
         Destroy(gameObject);

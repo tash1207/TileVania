@@ -22,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float waterJumpSpeed = 13f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(1f, 1f);
+
+    [SerializeField] AudioClip bounceSFX;
+    [SerializeField] AudioClip bulletSFX;
+    [SerializeField] AudioClip deathSFX;
+
     [SerializeField] GameObject bullet;
     [SerializeField] Transform gun;
 
@@ -41,12 +46,14 @@ public class PlayerMovement : MonoBehaviour
         Run();
         FlipSprite();
         ClimbLadder();
+        Bounce();
         Die();
     }
 
     void OnFire(InputValue value)
     {
         if (!isAlive) { return; }
+        SoundFXManager.instance.PlaySoundFXClip(bulletSFX, Camera.main.transform, 1f);
         Instantiate(bullet, gun.position, bullet.transform.rotation);
     }
 
@@ -113,10 +120,20 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isClimbing", playerHasVerticalSpeed);
     }
 
+    void Bounce()
+    {
+        // Might need to add a boool to ensure this only plays once
+        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Bouncing")))
+        {
+            SoundFXManager.instance.PlaySoundFXClip(bounceSFX, Camera.main.transform, 1f);
+        }
+    }
+
     void Die()
     {
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
         {
+            SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
             isAlive = false;
             animator.SetTrigger("Dying");
             spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);

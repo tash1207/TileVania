@@ -7945,7 +7945,8 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1731867997}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7396676334481720534, guid: 1f160281226e33841993099b9ed29f5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7960,10 +7961,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2580216537806733316, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2580216537806733316, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6396912252468006021, guid: 6b719270bbaa8164a97c12e785e4ef37, type: 3}

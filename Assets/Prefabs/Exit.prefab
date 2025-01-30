@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db9b4d4b2e6fa140acab3b60eafc62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelExitSFX: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
