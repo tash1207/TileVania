@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] AudioClip deathSFX;
 
+    bool isPlayingDeathSFX = false;
+
     Rigidbody2D rb2d;
     PlayerMovement player;
     float bulletVelocity;
@@ -29,8 +31,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !isPlayingDeathSFX)
         {
+            isPlayingDeathSFX = true;
             SoundFXManager.instance.PlaySoundFXClip(deathSFX, 1f);
             Destroy(other.gameObject);
         }
