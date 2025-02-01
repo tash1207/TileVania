@@ -13,7 +13,6 @@ public class SpeedRun : MonoBehaviour
 
     bool isSpeedRun = false;
     bool timerOn = false;
-    bool speedRunRanOutOfTime = false;
     bool speedRunSucceeded = false;
     float speedRunTime = 42f;
     float timeLeft;
@@ -38,13 +37,11 @@ public class SpeedRun : MonoBehaviour
             timerUI.SetActive(false);
             StartSceneManager.instance.ToggleSpeedRunUIOff();
         }
-
-        speedRunRanOutOfTime = false;
     }
 
     void Update()
     {
-        if (timerOn)
+        if (isSpeedRun && timerOn)
         {
             if (timeLeft > 0)
             {
@@ -55,7 +52,7 @@ public class SpeedRun : MonoBehaviour
             {
                 timeLeft = 0;
                 timerOn = false;
-                speedRunRanOutOfTime = true;
+                isSpeedRun = false;
                 FindObjectOfType<PlayerMovement>().Death();
             }
         }
@@ -81,7 +78,7 @@ public class SpeedRun : MonoBehaviour
 
     public void ResumeSpeedRun()
     {
-        if (isSpeedRun && !speedRunRanOutOfTime && !speedRunSucceeded)
+        if (isSpeedRun && !speedRunSucceeded)
         {
             timerOn = true;
         }
@@ -89,7 +86,7 @@ public class SpeedRun : MonoBehaviour
 
     public void StartTimer()
     {
-        if (isSpeedRun && !timerOn && !speedRunRanOutOfTime)
+        if (isSpeedRun && !timerOn)
         {
             timerOn = true;
             timeLeft = speedRunTime;
@@ -99,9 +96,13 @@ public class SpeedRun : MonoBehaviour
 
     public void Success()
     {
-        timerOn = false;
-        speedRunSucceeded = true;
-        timerUI.SetActive(false);
+        if (isSpeedRun)
+        {
+            timerOn = false;
+            speedRunSucceeded = true;
+            isSpeedRun = false;
+            timerUI.SetActive(false);
+        }
     }
 
     public bool IsSuccess()
