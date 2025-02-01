@@ -14,7 +14,7 @@ public class CoinPickup : MonoBehaviour
         if (other.tag == "Player" && !wasCollected)
         {
             FindObjectOfType<GameSession>().AddToScore(pointsPerGoldCoin);
-            SoundFXManager.instance.PlaySoundFXClip(coinPickupSFX, Camera.main.transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(coinPickupSFX, 1f);
             wasCollected = true;
             Destroy(gameObject);
         }

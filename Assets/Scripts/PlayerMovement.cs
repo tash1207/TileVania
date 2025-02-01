@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value)
     {
         if (!isAlive) { return; }
-        SoundFXManager.instance.PlaySoundFXClip(bulletSFX, Camera.main.transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(bulletSFX, 1f);
         Instantiate(bullet, gun.position, bullet.transform.rotation);
     }
 
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         // Might need to add a boool to ensure this only plays once
         if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Bouncing")))
         {
-            SoundFXManager.instance.PlaySoundFXClip(bounceSFX, Camera.main.transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(bounceSFX, 1f);
         }
     }
 
@@ -139,7 +139,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
+        Debug.Log("Death");
+        SoundFXManager.instance.PlaySoundFXClip(deathSFX, 1f);
         isAlive = false;
         animator.SetTrigger("Dying");
         spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);

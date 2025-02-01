@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(deathSFX, 1f);
             Destroy(other.gameObject);
         }
         Destroy(gameObject);

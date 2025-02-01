@@ -26,7 +26,7 @@ public class SpeedRun : MonoBehaviour
     }
 
     public void ToggleSpeedRun() {
-        SoundFXManager.instance.PlaySoundFXClip(toggleModeSFX, Camera.main.transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(toggleModeSFX, 1f);
         isSpeedRun = !isSpeedRun;
         if (isSpeedRun)
         {

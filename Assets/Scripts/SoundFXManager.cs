@@ -15,9 +15,9 @@ public class SoundFXManager : MonoBehaviour
         }
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    public void PlaySoundFXClip(AudioClip audioClip, float volume)
     {
-        AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
+        AudioSource audioSource = Instantiate(soundFXObject, Camera.main.transform.position, Quaternion.identity);
         audioSource.clip = audioClip;
         audioSource.volume = volume;
         audioSource.Play();
