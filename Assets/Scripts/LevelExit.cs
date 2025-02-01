@@ -22,9 +22,12 @@ public class LevelExit : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
+        // Player is exiting the last level.
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex = 0;
+            PlayerPrefs.SetInt("Won", 1);
+            PlayerPrefs.Save();
             SpeedRun.instance.Success();
         }
 

@@ -30,14 +30,21 @@ public class StartSceneManager : MonoBehaviour
         // and achievement achieved title text.
         titleUI.SetActive(true);
         titleText.text = SpeedRun.instance.IsSuccess() ? achievementText : gameTitleText;
+
+        if (PlayerPrefs.GetInt("Won", 0) != 0)
+        {
+            clock.SetActive(true);
+        }
     }
 
     void Update()
     {
+    #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.C))
         {
             clock.SetActive(true);
         }
+    #endif
     }
 
     public void ToggleSpeedRunUIOn()
