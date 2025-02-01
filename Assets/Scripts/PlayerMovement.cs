@@ -133,12 +133,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (bodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
         {
-            SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
-            isAlive = false;
-            animator.SetTrigger("Dying");
-            spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
-            rb2d.velocity = deathKick;
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            Death();
         }
+    }
+
+    public void Death()
+    {
+        SoundFXManager.instance.PlaySoundFXClip(deathSFX, Camera.main.transform, 1f);
+        isAlive = false;
+        animator.SetTrigger("Dying");
+        spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+        rb2d.velocity = deathKick;
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
 }

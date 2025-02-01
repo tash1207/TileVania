@@ -51,7 +51,7 @@ public class GameSession : MonoBehaviour
 
     public void ProcessPlayerDeath()
     {
-        if (playerLives > 1)
+        if (playerLives > 1 && !SpeedRun.instance.IsSpeedRun())
         {
             TakeLife();
         }
