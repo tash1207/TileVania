@@ -26,4 +26,17 @@ public class SoundFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    public void PlaySoundFXClipXTimes(AudioClip audioClip, float volume, int times)
+    {
+        StartCoroutine(PlayAudio(audioClip, volume, times));
+    }
+
+    IEnumerator PlayAudio(AudioClip audioClip, float volume, int times)
+    {
+        for (int i = 0; i < times; i++)
+        {
+            PlaySoundFXClip(audioClip, volume);
+            yield return new WaitForSeconds(audioClip.length);
+        }
+    }
 }
