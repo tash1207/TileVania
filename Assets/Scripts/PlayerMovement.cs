@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip bulletSFX;
     [SerializeField] AudioClip deathSFX;
 
+    bool isPlayingBounceSFX = false;
+
     [SerializeField] GameObject bullet;
     [SerializeField] Transform gun;
 
@@ -122,11 +124,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Bounce()
     {
-        // Might need to add a boool to ensure this only plays once
-        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Bouncing")))
+        if (feetCollider.IsTouchingLayers(LayerMask.GetMask("Bouncing")) && !isPlayingBounceSFX)
         {
+            isPlayingBounceSFX = true;
             SoundFXManager.instance.PlaySoundFXClip(bounceSFX, 1f);
+            StartCoroutine(ResetBounceSFX());
         }
+    }
+
+    IEnumerator ResetBounceSFX()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        isPlayingBounceSFX = false;
     }
 
     void Die()
