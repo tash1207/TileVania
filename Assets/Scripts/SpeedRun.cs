@@ -73,12 +73,15 @@ public class SpeedRun : MonoBehaviour
 
     public void PauseSpeedRun()
     {
-        timerOn = false;
+        if (isSpeedRun)
+        {
+            timerOn = false;
+        }
     }
 
     public void ResumeSpeedRun()
     {
-        if (!speedRunRanOutOfTime && !speedRunSucceeded)
+        if (isSpeedRun && !speedRunRanOutOfTime && !speedRunSucceeded)
         {
             timerOn = true;
         }
