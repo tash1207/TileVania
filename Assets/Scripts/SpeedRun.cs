@@ -8,13 +8,16 @@ public class SpeedRun : MonoBehaviour
     public static SpeedRun instance;
 
     [SerializeField] AudioClip toggleModeSFX;
+    [SerializeField] AudioClip tickTockSFX;
     [SerializeField] GameObject timerUI;
     [SerializeField] TextMeshProUGUI timeLeftText;
 
     bool isSpeedRun = false;
-    bool timerOn = false;
     bool speedRunSucceeded = false;
+
+    bool timerOn = false;
     float speedRunTime = 42f;
+    float tickTockTime = 3f;
     float timeLeft;
 
     void Awake() {
@@ -29,6 +32,7 @@ public class SpeedRun : MonoBehaviour
         isSpeedRun = !isSpeedRun;
         if (isSpeedRun)
         {
+            timeLeftText.text = ":" + string.Format("{0:00}", speedRunTime);
             timerUI.SetActive(true);
             StartSceneManager.instance.ToggleSpeedRunUIOn();
         }
@@ -52,15 +56,21 @@ public class SpeedRun : MonoBehaviour
             {
                 timeLeft = 0;
                 timerOn = false;
-                isSpeedRun = false;
                 FindObjectOfType<PlayerMovement>().Death();
+                isSpeedRun = false;
             }
         }
     }
 
     void UpdateTimer(float currentTime)
     {
-        timeLeftText.text = ":" + string.Format("{0:00}", currentTime);
+        timeLeftText.text = ":" + string.Format("{0:00}", Mathf.Ceil(currentTime));
+
+        if (currentTime < tickTockTime && currentTime > 0)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(tickTockSFX, 1f);
+            tickTockTime -= 1f;
+        }
     }
 
     public bool IsSpeedRun()

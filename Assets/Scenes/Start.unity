@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggleModeSFX: {fileID: 0}
+  tickTockSFX: {fileID: 0}
   timerUI: {fileID: 0}
   timeLeftText: {fileID: 0}
 --- !u!1001 &703214814
@@ -941,6 +942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggleModeSFX: {fileID: 8300000, guid: c8200565d80a7e94582d2cfefc4008b9, type: 3}
+  tickTockSFX: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
   timerUI: {fileID: 615422059}
   timeLeftText: {fileID: 53281875}
 --- !u!1 &825684864

@@ -139,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log("Death");
         SoundFXManager.instance.PlaySoundFXClip(deathSFX, 1f);
         isAlive = false;
         animator.SetTrigger("Dying");
