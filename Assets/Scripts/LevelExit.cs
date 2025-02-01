@@ -7,9 +7,12 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] AudioClip levelExitSFX;
 
+    bool isPlayingLevelExitSFX = false;
+
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !isPlayingLevelExitSFX)
         {
+            isPlayingLevelExitSFX = true;
             SoundFXManager.instance.PlaySoundFXClip(levelExitSFX, 0.6f);
             StartCoroutine(LoadNextLevel());
         }
