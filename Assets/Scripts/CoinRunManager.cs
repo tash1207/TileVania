@@ -7,7 +7,7 @@ public class CoinRunManager : MonoBehaviour
 {
     public static CoinRunManager instance;
 
-    int totalCoins = 12;
+    int totalCoins = 13;
     int coinsCollected = 0;
 
     [SerializeField] AudioClip toggleModeSFX;
