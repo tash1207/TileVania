@@ -155,4 +155,9 @@ public class PlayerMovement : MonoBehaviour
         rb2d.velocity = deathKick;
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
+
+    public bool IsAlive()
+    {
+        return isAlive;
+    }
 }

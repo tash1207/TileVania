@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
     bool isPlayingLevelExitSFX = false;
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player" && !isPlayingLevelExitSFX)
+        if (other.tag == "Player" && !isPlayingLevelExitSFX && FindObjectOfType<PlayerMovement>().IsAlive())
         {
             isPlayingLevelExitSFX = true;
             SoundFXManager.instance.PlaySoundFXClip(levelExitSFX, 0.6f);
