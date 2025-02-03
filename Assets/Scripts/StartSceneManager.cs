@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour
 {
@@ -9,8 +10,14 @@ public class StartSceneManager : MonoBehaviour
 
     [SerializeField] GameObject titleUI;
     [SerializeField] TextMeshProUGUI titleText;
+
     [SerializeField] GameObject clock;
     [SerializeField] SpriteRenderer clockImage;
+
+    [Header("Options")]
+    [SerializeField] Slider masterVolumeSlider;
+    [SerializeField] Slider soundFXVolumeSlider;
+    [SerializeField] Slider musicVolumeSlider;
 
     string gameTitleText = "TileVania";
     string gameOverText = "Game Over";
@@ -35,6 +42,8 @@ public class StartSceneManager : MonoBehaviour
         {
             clock.SetActive(true);
         }
+
+        SetVolumeLevels();
     }
 
     void Update()
@@ -45,6 +54,13 @@ public class StartSceneManager : MonoBehaviour
             clock.SetActive(true);
         }
     #endif
+    }
+
+    void SetVolumeLevels()
+    {
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume", 1f);
+        soundFXVolumeSlider.value = PlayerPrefs.GetFloat("soundFXVolume", 1f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
     }
 
     public void ToggleSpeedRunUIOn()
