@@ -30,6 +30,8 @@ public class SpeedRun : MonoBehaviour
     public void ToggleSpeedRun() {
         SoundFXManager.instance.PlaySoundFXClip(toggleModeSFX, 1f);
         isSpeedRun = !isSpeedRun;
+        FindObjectOfType<GameSession>().ResetLivesAndScore();
+        
         if (isSpeedRun)
         {
             timeLeftText.text = ":" + string.Format("{0:00}", speedRunTime);

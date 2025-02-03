@@ -36,7 +36,7 @@ public class GameSession : MonoBehaviour
 
     public void ResetLivesAndScore()
     {
-        playerLives = startingPlayerLives;
+        playerLives = SpeedRun.instance.IsSpeedRun() ? 1 : startingPlayerLives;
         totalScore = startingTotalScore;
 
         numLivesText.text = playerLives.ToString();
