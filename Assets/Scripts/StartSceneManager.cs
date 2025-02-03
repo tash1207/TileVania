@@ -11,8 +11,13 @@ public class StartSceneManager : MonoBehaviour
     [SerializeField] GameObject titleUI;
     [SerializeField] TextMeshProUGUI titleText;
 
-    [SerializeField] GameObject clock;
+    [Header("Runs")]
+    [SerializeField] GameObject runModesIcons;
     [SerializeField] SpriteRenderer clockImage;
+    [SerializeField] SpriteRenderer coinImage;
+
+    float clockAlpha = 0.4f;
+    float coinAlpha = 0.3f;
 
     [Header("Options")]
     [SerializeField] Slider masterVolumeSlider;
@@ -36,13 +41,14 @@ public class StartSceneManager : MonoBehaviour
         // TODO: Add logic for displaying the game over, you win,
         // and achievement achieved title text.
         titleUI.SetActive(true);
-        titleText.text = SpeedRun.instance.IsSuccess() ? achievementText : gameTitleText;
+        titleText.text = SuccessfullyCompletedRun() ? achievementText : gameTitleText;
 
         if (PlayerPrefs.GetInt("Won", 0) != 0)
         {
-            clock.SetActive(true);
+            runModesIcons.SetActive(true);
         }
 
+        ResetRuns();
         SetVolumeLevels();
     }
 
@@ -51,7 +57,7 @@ public class StartSceneManager : MonoBehaviour
     #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.C))
         {
-            clock.SetActive(true);
+            runModesIcons.SetActive(true);
         }
     #endif
     }
@@ -63,8 +69,14 @@ public class StartSceneManager : MonoBehaviour
         musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
     }
 
+    bool SuccessfullyCompletedRun()
+    {
+        return SpeedRun.instance.IsSuccess() || CoinRunManager.instance.IsSuccess();
+    }
+
     public void ToggleSpeedRunUIOn()
     {
+        DisableCoinRun();
         titleUI.SetActive(false);
         var tempColor = clockImage.color;
         tempColor.a = 1f;
@@ -75,7 +87,45 @@ public class StartSceneManager : MonoBehaviour
     {
         titleUI.SetActive(true);
         var tempColor = clockImage.color;
-        tempColor.a = 0.5f;
+        tempColor.a = clockAlpha;
         clockImage.color = tempColor;
+    }
+
+    public void ToggleCoinRunUIOn()
+    {
+        DisableSpeedRun();
+        titleUI.SetActive(false);
+        var tempColor = coinImage.color;
+        tempColor.a = 1f;
+        coinImage.color = tempColor;
+    }
+
+    public void ToggleCoinRunUIOff()
+    {
+        titleUI.SetActive(true);
+        var tempColor = coinImage.color;
+        tempColor.a = coinAlpha;
+        coinImage.color = tempColor;
+    }
+
+    void ResetRuns()
+    {
+        DisableSpeedRun();
+        DisableCoinRun();
+    }
+
+    // TODO: Consider adding a run type enum.
+    void DisableSpeedRun()
+    {
+        ToggleSpeedRunUIOff();
+        SpeedRun.instance.DisableTimerUI();
+        SpeedRun.instance.SetSpeedRun(false);
+    }
+
+    void DisableCoinRun()
+    {
+        ToggleCoinRunUIOff();
+        CoinRunManager.instance.DisableCoinsCollectedUI();
+        CoinRunManager.instance.SetCoinRun(false);
     }
 }

@@ -30,19 +30,30 @@ public class SpeedRun : MonoBehaviour
     public void ToggleSpeedRun() {
         SoundFXManager.instance.PlaySoundFXClip(toggleModeSFX, 1f);
         isSpeedRun = !isSpeedRun;
-        FindObjectOfType<GameSession>().ResetLivesAndScore();
-        
+
         if (isSpeedRun)
         {
-            timeLeftText.text = ":" + string.Format("{0:00}", speedRunTime);
-            timerUI.SetActive(true);
             StartSceneManager.instance.ToggleSpeedRunUIOn();
+            timeLeftText.text = ":" + string.Format("{0:00}", speedRunTime);
+            EnableTimerUI();
         }
         else
         {
-            timerUI.SetActive(false);
             StartSceneManager.instance.ToggleSpeedRunUIOff();
+            DisableTimerUI();
         }
+
+        FindObjectOfType<GameSession>().ResetLivesAndScore();
+    }
+
+    public void EnableTimerUI()
+    {
+        timerUI.SetActive(true);
+    }
+
+    public void DisableTimerUI()
+    {
+        timerUI.SetActive(false);
     }
 
     void Update()
@@ -78,6 +89,11 @@ public class SpeedRun : MonoBehaviour
     public bool IsSpeedRun()
     {
         return isSpeedRun;
+    }
+
+    public void SetSpeedRun(bool value)
+    {
+        isSpeedRun = value;
     }
 
     public void PauseSpeedRun()

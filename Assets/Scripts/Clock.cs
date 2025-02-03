@@ -6,7 +6,6 @@ public class Clock : MonoBehaviour
 {
     bool speedRunToggled = false;
 
-    // Consider putting this in PlayerMovement and limiting to the bodyCollider.
     void OnTriggerEnter2D(Collider2D other) {
         if (!speedRunToggled && other.tag == "Player")
         {

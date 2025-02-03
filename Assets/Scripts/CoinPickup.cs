@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CoinPickup : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class CoinPickup : MonoBehaviour
     {
         if (other.tag == "Player" && !wasCollected)
         {
+            // Don't include the start scene coin in the coin run.
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                CoinRunManager.instance.CollectCoin();
+            }
             FindObjectOfType<GameSession>().AddToScore(pointsPerGoldCoin);
             SoundFXManager.instance.PlaySoundFXClip(coinPickupSFX, 1f);
             wasCollected = true;
