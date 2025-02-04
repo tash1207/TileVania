@@ -67,7 +67,9 @@ public class GameSession : MonoBehaviour
         }
         else
         {
-            if (SpeedRun.instance.IsSpeedRun() || CoinRunManager.instance.IsCoinRun())
+            if (SpeedRun.instance.IsSpeedRun() ||
+                CoinRunManager.instance.IsCoinRun() ||
+                EnemyRunManager.instance.IsEnemyRun())
             {
                 SetStartMenuState(StartMenuState.RunFail);
             }
@@ -106,6 +108,7 @@ public class GameSession : MonoBehaviour
     {
         SpeedRun.instance.ResetSpeedRun();
         CoinRunManager.instance.ResetCoinRun();
+        EnemyRunManager.instance.ResetEnemyRun();
     }
 
     public StartMenuState GetStartMenuState()

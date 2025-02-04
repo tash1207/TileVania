@@ -15,9 +15,11 @@ public class StartSceneManager : MonoBehaviour
     [SerializeField] GameObject runModesIcons;
     [SerializeField] SpriteRenderer clockImage;
     [SerializeField] SpriteRenderer coinImage;
+    [SerializeField] SpriteRenderer enemyImage;
 
     float clockAlpha = 0.4f;
     float coinAlpha = 0.3f;
+    float enemyAlpha = 0.35f;
 
     [Header("Options")]
     [SerializeField] Slider masterVolumeSlider;
@@ -103,6 +105,7 @@ public class StartSceneManager : MonoBehaviour
     public void ToggleSpeedRunUIOn()
     {
         DisableCoinRun();
+        DisableEnemyRun();
         titleUI.SetActive(false);
         var tempColor = clockImage.color;
         tempColor.a = 1f;
@@ -120,6 +123,7 @@ public class StartSceneManager : MonoBehaviour
     public void ToggleCoinRunUIOn()
     {
         DisableSpeedRun();
+        DisableEnemyRun();
         titleUI.SetActive(false);
         var tempColor = coinImage.color;
         tempColor.a = 1f;
@@ -134,10 +138,29 @@ public class StartSceneManager : MonoBehaviour
         coinImage.color = tempColor;
     }
 
+    public void ToggleEnemyRunUIOn()
+    {
+        DisableSpeedRun();
+        DisableCoinRun();
+        titleUI.SetActive(false);
+        var tempColor = enemyImage.color;
+        tempColor.a = 1f;
+        enemyImage.color = tempColor;
+    }
+
+    public void ToggleEnemyRunUIOff()
+    {
+        titleUI.SetActive(true);
+        var tempColor = enemyImage.color;
+        tempColor.a = enemyAlpha;
+        enemyImage.color = tempColor;
+    }
+
     void ResetRuns()
     {
         DisableSpeedRun();
         DisableCoinRun();
+        DisableEnemyRun();
     }
 
     // TODO: Consider adding a run type enum.
@@ -153,5 +176,12 @@ public class StartSceneManager : MonoBehaviour
         ToggleCoinRunUIOff();
         CoinRunManager.instance.DisableCoinsCollectedUI();
         CoinRunManager.instance.SetCoinRun(false);
+    }
+
+    void DisableEnemyRun()
+    {
+        ToggleEnemyRunUIOff();
+        EnemyRunManager.instance.DisableEnemiesKilledUI();
+        EnemyRunManager.instance.SetEnemyRun(false);
     }
 }

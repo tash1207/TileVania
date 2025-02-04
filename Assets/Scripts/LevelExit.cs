@@ -53,11 +53,17 @@ public class LevelExit : MonoBehaviour
         GameSession gameSession = FindObjectOfType<GameSession>();
         gameSession.SetStartMenuState(GameSession.StartMenuState.Win);
 
-        if (SpeedRun.instance.IsSuccess() || CoinRunManager.instance.IsSuccess())
+        if (SpeedRun.instance.IsSuccess() ||
+            CoinRunManager.instance.IsSuccess() ||
+            EnemyRunManager.instance.IsSuccess())
         {
             gameSession.SetStartMenuState(GameSession.StartMenuState.RunSuccess);
         }
         else if (CoinRunManager.instance.IsCoinRun() && !CoinRunManager.instance.IsSuccess())
+        {
+            gameSession.SetStartMenuState(GameSession.StartMenuState.RunFail);
+        }
+        else if (EnemyRunManager.instance.IsEnemyRun() && !EnemyRunManager.instance.IsSuccess())
         {
             gameSession.SetStartMenuState(GameSession.StartMenuState.RunFail);
         }
