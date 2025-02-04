@@ -62,6 +62,14 @@ public class CoinRunManager : MonoBehaviour
     public void SetCoinRun(bool value)
     {
         isCoinRun = value;
+        coinRunSucceeded = false;
+    }
+
+    public void ResetCoinRun()
+    {
+        isCoinRun = false;
+        coinRunSucceeded = false;
+        coinsCollected = 0;
     }
 
     public void CollectCoin()

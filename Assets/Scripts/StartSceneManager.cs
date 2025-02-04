@@ -28,6 +28,9 @@ public class StartSceneManager : MonoBehaviour
     string gameOverText = "Game Over";
     string winText = "You Win!";
     string achievementText = "Success!";
+    string achievementFailText = "Failed";
+
+    float titleTextDelay = 4f;
 
     void Awake() {
         if (instance == null)
@@ -38,10 +41,8 @@ public class StartSceneManager : MonoBehaviour
 
     void Start()
     {
-        // TODO: Add logic for displaying the game over, you win,
-        // and achievement achieved title text.
+        SetTitleText();
         titleUI.SetActive(true);
-        titleText.text = SuccessfullyCompletedRun() ? achievementText : gameTitleText;
 
         if (PlayerPrefs.GetInt("Won", 0) != 0)
         {
@@ -62,16 +63,41 @@ public class StartSceneManager : MonoBehaviour
     #endif
     }
 
+    void SetTitleText()
+    {
+        GameSession.StartMenuState startMenuState = FindObjectOfType<GameSession>().GetStartMenuState();
+        switch (startMenuState)
+        {
+            case GameSession.StartMenuState.Start:
+                titleText.text = gameTitleText;
+                return;
+            case GameSession.StartMenuState.Win:
+                titleText.text = winText;
+                break;
+            case GameSession.StartMenuState.GameOver:
+                titleText.text = gameOverText;
+                break;
+            case GameSession.StartMenuState.RunSuccess:
+                titleText.text = achievementText;
+                break;
+            case GameSession.StartMenuState.RunFail:
+                titleText.text = achievementFailText;
+                break;
+        }
+        Invoke("ShowGameTitleText", titleTextDelay);
+    }
+
+    void ShowGameTitleText()
+    {
+        FindObjectOfType<GameSession>().SetStartMenuState(GameSession.StartMenuState.Start);
+        titleText.text = gameTitleText;
+    }
+
     void SetVolumeLevels()
     {
         masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume", 1f);
         soundFXVolumeSlider.value = PlayerPrefs.GetFloat("soundFXVolume", 1f);
         musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
-    }
-
-    bool SuccessfullyCompletedRun()
-    {
-        return SpeedRun.instance.IsSuccess() || CoinRunManager.instance.IsSuccess();
     }
 
     public void ToggleSpeedRunUIOn()

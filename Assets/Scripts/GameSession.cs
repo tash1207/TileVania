@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
+    public enum StartMenuState
+    {
+        Start, // When game is just started. This is the default state.
+        Win, // When player wins main game.
+        GameOver, // When player loses main game.
+        RunSuccess, // When player successfully completes a run.
+        RunFail, // When player fails a run.
+    }
+
     [SerializeField] int startingPlayerLives = 3;
     [SerializeField] int startingTotalScore = 0;
 
@@ -16,6 +25,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI numScoreText;
 
     float levelLoadDelay = 1.3f;
+    StartMenuState startMenuState = StartMenuState.Start;
 
     void Awake()
     {
@@ -51,12 +61,20 @@ public class GameSession : MonoBehaviour
 
     public void ProcessPlayerDeath()
     {
-        if (playerLives > 1 && !SpeedRun.instance.IsSpeedRun())
+        if (playerLives > 1)
         {
             TakeLife();
         }
         else
         {
+            if (SpeedRun.instance.IsSpeedRun() || CoinRunManager.instance.IsCoinRun())
+            {
+                SetStartMenuState(StartMenuState.RunFail);
+            }
+            else
+            {
+                SetStartMenuState(StartMenuState.GameOver);
+            }
             StartCoroutine(ResetGameSession());
         }
     }
@@ -79,7 +97,24 @@ public class GameSession : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(levelLoadDelay);
         FindObjectOfType<ScenePersist>().ResetScenePersist();
+        ResetAllRuns();
+        ResetLivesAndScore();
         SceneManager.LoadScene(0);
-        Destroy(gameObject);
+    }
+
+    void ResetAllRuns()
+    {
+        SpeedRun.instance.ResetSpeedRun();
+        CoinRunManager.instance.ResetCoinRun();
+    }
+
+    public StartMenuState GetStartMenuState()
+    {
+        return startMenuState;
+    }
+
+    public void SetStartMenuState(StartMenuState state)
+    {
+        startMenuState = state;
     }
 }

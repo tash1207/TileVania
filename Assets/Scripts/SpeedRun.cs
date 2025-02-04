@@ -94,6 +94,15 @@ public class SpeedRun : MonoBehaviour
     public void SetSpeedRun(bool value)
     {
         isSpeedRun = value;
+        speedRunSucceeded = false;
+    }
+
+    public void ResetSpeedRun()
+    {
+        isSpeedRun = false;
+        speedRunSucceeded = false;
+        timerOn = false;
+        timeLeft = speedRunTime;
     }
 
     public void PauseSpeedRun()

@@ -32,6 +32,7 @@ public class LevelExit : MonoBehaviour
             PlayerPrefs.SetInt("Won", 1);
             PlayerPrefs.Save();
             SpeedRun.instance.Success();
+            SetStartMenuState();
         }
 
         // Reset score and lives if leaving start menu scene.
@@ -45,5 +46,20 @@ public class LevelExit : MonoBehaviour
         FindObjectOfType<ScenePersist>().ResetScenePersist();
         SpeedRun.instance.ResumeSpeedRun();
         SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    void SetStartMenuState()
+    {
+        GameSession gameSession = FindObjectOfType<GameSession>();
+        gameSession.SetStartMenuState(GameSession.StartMenuState.Win);
+
+        if (SpeedRun.instance.IsSuccess() || CoinRunManager.instance.IsSuccess())
+        {
+            gameSession.SetStartMenuState(GameSession.StartMenuState.RunSuccess);
+        }
+        else if (CoinRunManager.instance.IsCoinRun() && !CoinRunManager.instance.IsSuccess())
+        {
+            gameSession.SetStartMenuState(GameSession.StartMenuState.RunFail);
+        }
     }
 }
